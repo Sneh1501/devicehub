@@ -53,16 +53,16 @@ public class DeviceService {
                 })
                 .orElse(null);
     }
-
+    /**
+     * TODO: This implementation removes dependency on DeviceRepository methods
+     *     but with higher number of devices, filtering would slow down the application
+     *     hence need to find a better solution
+     *     */
     public List<DeviceDTO> getDevicesByFilters(String name, String brand, DeviceState state) {
-        if (brand != null) return deviceRepository.findByBrand(brand).stream().map(mapper::toDTO).toList();
-        if (state != null) return deviceRepository.findByState(state).stream().map(mapper::toDTO).toList();
-        if (name != null) return deviceRepository.findByName(name).stream().map(mapper::toDTO).toList();
-        return getAllDevices();
-    }
-
-    public List<DeviceDTO> getAllDevices() {
         return deviceRepository.findAll().stream()
+                .filter(d -> name == null || d.getName().equalsIgnoreCase(name))
+                .filter(d -> brand == null || d.getBrand().equalsIgnoreCase(brand))
+                .filter(d -> state == null || d.getState() == state)
                 .map(mapper::toDTO)
                 .toList();
     }

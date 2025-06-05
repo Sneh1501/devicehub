@@ -19,15 +19,15 @@ public class Device {
     private DeviceState state;
 
     private LocalDateTime creationTime;
-
     public Device() {
-    }
 
-    public Device(Long id, String name, String brand, DeviceState state) {
+    }
+    public Device(Long id, String name, String brand, DeviceState state, LocalDateTime creationTime) {
         this.id = id;
         this.name = name;
         this.brand = brand;
         this.state = state;
+        this.creationTime = creationTime;
     }
 
     public Long getId() {
