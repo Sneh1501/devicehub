@@ -27,7 +27,7 @@ class DeviceControllerTest {
     @MockitoBean
     private DeviceService deviceService;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     private DeviceDTO validDevice;
     private DeviceDTO invalidDevice;
