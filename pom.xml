@@ -8,7 +8,7 @@
 		<version>3.5.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.1global.webservice</groupId>
+	<groupId>com.global1.webservice</groupId>
 	<artifactId>devicehub</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>devicehub</name>

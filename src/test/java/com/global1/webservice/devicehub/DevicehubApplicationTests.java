@@ -1,4 +1,4 @@
-package com._global.webservice.devicehub;
+package com.global1.webservice.devicehub;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com._global.webservice.devicehub;
+package com.global1.webservice.devicehub;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
