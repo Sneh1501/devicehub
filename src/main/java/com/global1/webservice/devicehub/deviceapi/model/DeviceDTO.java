@@ -21,12 +21,11 @@ public class DeviceDTO {
     public DeviceDTO() {
     }
 
-    public DeviceDTO(Long id, String name, String brand, DeviceState state, LocalDateTime creationTime) {
+    public DeviceDTO(Long id, String name, String brand, DeviceState state) {
         this.id = id;
         this.name = name;
         this.brand = brand;
         this.state = state;
-        this.creationTime = creationTime;
     }
 
     public Long getId() {

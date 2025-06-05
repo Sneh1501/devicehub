@@ -20,6 +20,16 @@ public class Device {
 
     private LocalDateTime creationTime;
 
+    public Device() {
+    }
+
+    public Device(Long id, String name, String brand, DeviceState state) {
+        this.id = id;
+        this.name = name;
+        this.brand = brand;
+        this.state = state;
+    }
+
     public Long getId() {
         return id;
     }
