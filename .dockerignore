@@ -1,0 +1,12 @@
+# Ignore Git
+.git
+.gitignore
+
+# Ignore local configuration files
+*.iml
+.idea
+*.log
+.mvn
+
+# Ignore Dockerfile artifacts
+*.jar
