@@ -1,5 +1,6 @@
 package com.global1.webservice.devicehub.deviceapi.model;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
@@ -7,10 +8,10 @@ import java.time.LocalDateTime;
 public class DeviceDTO {
     private Long id;
 
-    @NotNull(message= "Device name is required")
+    @NotBlank(message= "Device name is required")
     private String name;
 
-    @NotNull(message="Brand name is required")
+    @NotBlank(message="Brand name is required")
     private String brand;
 
     @NotNull(message="Device state is required")
