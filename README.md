@@ -38,11 +38,32 @@ spring.jpa.hibernate.ddl-auto=update
 ---
 
 ## Running the Application
-Local (Maven)
+### Local (Maven)
 ```
 ./mvnw clean install
 ./mvnw spring-boot:run
 ```
+
+### Docker (Preferred for containerized environments)
+Ensure Docker is installed and running on your system.
+
+Build & Run with Docker Compose
+
+``docker compose up --build``
+
+This will:
+- Build the Spring Boot application image
+- Start a PostgreSQL container for persistence
+- Expose the app at http://localhost:8080
+
+Stopping Containers
+
+```
+docker compose down -v
+
+(Use -v to also remove the database volume)
+```
+
 ---
 
 ## API Usage
