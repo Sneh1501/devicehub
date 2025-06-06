@@ -105,12 +105,14 @@ class DeviceControllerTest {
 
     @Test
     void replaceDevice_notFound() throws Exception {
-        when(deviceService.updateDevice(1L, validDevice)).thenReturn(null);
+        doThrow(new NoSuchElementException("Device not found")).when(deviceService).updateDevice(eq(1L), any());
 
         mockMvc.perform(put("/devices/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(validDevice)))
-                .andExpect(status().isNotFound());
+                        .andExpect(status().isNotFound())
+                        .andExpect(jsonPath("$.status").value(404))
+                        .andExpect(jsonPath("$.message").value("Device not found"));
     }
 
     @Test

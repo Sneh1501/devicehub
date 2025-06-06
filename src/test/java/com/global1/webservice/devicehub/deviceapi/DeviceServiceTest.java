@@ -65,9 +65,14 @@ public class DeviceServiceTest {
     }
 
     @Test
-    void getDeviceById_notFound_returnsNull() {
+    void getDeviceById_notFound_returnsException() {
         Mockito.when(deviceRepository.findById(1L)).thenReturn(Optional.empty());
-        assertNull(deviceService.getDeviceById(1L));
+        NoSuchElementException exception = assertThrows(
+                NoSuchElementException.class,
+                () -> deviceService.getDeviceById(1L)
+        );
+
+        assertEquals("Device not found with id: 1", exception.getMessage());
     }
 
     @Test
@@ -97,9 +102,14 @@ public class DeviceServiceTest {
     }
 
     @Test
-    void updateDevice_notFound_returnsNull() {
+    void updateDevice_notFound_returnsException() {
         Mockito.when(deviceRepository.findById(1L)).thenReturn(Optional.empty());
-        assertNull(deviceService.updateDevice(1L, deviceDTO1));
+        NoSuchElementException exception = assertThrows(
+                NoSuchElementException.class,
+                () -> deviceService.getDeviceById(1L)
+        );
+
+        assertEquals("Device not found with id: 1", exception.getMessage());
     }
 
     @Test

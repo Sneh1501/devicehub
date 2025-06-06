@@ -35,8 +35,7 @@ public class DeviceController {
             @PathVariable Long id,
             @Valid @RequestBody DeviceDTO deviceDTO
     ) {
-        DeviceDTO replaced = deviceService.updateDevice(id, deviceDTO);
-        return replaced != null ? ResponseEntity.ok(replaced) : ResponseEntity.notFound().build();
+        return ResponseEntity.ok(deviceService.updateDevice(id, deviceDTO));
     }
 
     @GetMapping

@@ -34,24 +34,23 @@ public class DeviceService {
     }
 
     public DeviceDTO updateDevice(Long id, DeviceDTO updatedDto) {
-        return deviceRepository.findById(id)
-                .map(exsitingDevice -> {
-                    // Check if device is IN_USE and if name/brand are being changed
-                    if (exsitingDevice.getState() == DeviceState.IN_USE) {
-                        if (!Objects.equals(exsitingDevice.getName(), updatedDto.getName())) {
-                            throw new IllegalArgumentException("Cannot update device name when state is IN_USE");
-                        }
-                        if (!Objects.equals(exsitingDevice.getBrand(), updatedDto.getBrand())) {
-                            throw new IllegalArgumentException("Cannot update device brand when state is IN_USE");
-                        }
-                    }
+        Device device = deviceRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Device not found with id: " + id));
 
-                    exsitingDevice.setName(updatedDto.getName());
-                    exsitingDevice.setBrand(updatedDto.getBrand());
-                    exsitingDevice.setState(updatedDto.getState());
-                    return mapper.toDTO(deviceRepository.save(exsitingDevice));
-                })
-                .orElse(null);
+        if (device.getState() == DeviceState.IN_USE) {
+            if (!Objects.equals(device.getName(), updatedDto.getName())) {
+                throw new IllegalArgumentException("Cannot update device name when state is IN_USE");
+            }
+            if (!Objects.equals(device.getBrand(), updatedDto.getBrand())) {
+                throw new IllegalArgumentException("Cannot update device brand when state is IN_USE");
+            }
+        }
+
+        device.setName(updatedDto.getName());
+        device.setBrand(updatedDto.getBrand());
+        device.setState(updatedDto.getState());
+
+        return mapper.toDTO(deviceRepository.save(device));
     }
     /**
      * TODO: This implementation removes dependency on DeviceRepository methods
