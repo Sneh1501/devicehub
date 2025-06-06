@@ -40,7 +40,7 @@ class DeviceControllerTest {
     void setUp() {
         validDevice = new DeviceDTO(1L, "Device1", "BrandA", DeviceState.AVAILABLE);
         validDevice2 = new DeviceDTO(2L, "Device2", "BrandB", DeviceState.IN_USE);
-        invalidDevice = new DeviceDTO(null, "", "", null); // invalid name, brand, and state
+        invalidDevice = new DeviceDTO(1L, " ", "Brand2", null); // invalid name, brand, and state
     }
 
     @Test
@@ -60,7 +60,9 @@ class DeviceControllerTest {
         mockMvc.perform(post("/devices")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidDevice)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.message").value("Validation failed"));
     }
 
     @Test
@@ -156,11 +158,12 @@ class DeviceControllerTest {
 
     @Test
     void deleteDevice_shouldReturnBadRequest() throws Exception {
-        doThrow(new IllegalStateException("Device is in use")).when(deviceService).deleteDeviceById(1L);
+        doThrow(new IllegalArgumentException("Device is in use")).when(deviceService).deleteDeviceById(1L);
 
         mockMvc.perform(delete("/devices/1"))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("Device is in use"));
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.message").value("Device is in use"));
     }
 }
 
