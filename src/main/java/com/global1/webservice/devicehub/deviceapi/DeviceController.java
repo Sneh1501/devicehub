@@ -57,13 +57,7 @@ public class DeviceController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteDevice(@PathVariable Long id) {
-        try {
-            deviceService.deleteDeviceById(id);
-            return ResponseEntity.noContent().build();
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
-        } catch (IllegalStateException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        deviceService.deleteDeviceById(id);
+        return ResponseEntity.noContent().build();
     }
 }

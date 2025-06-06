@@ -59,9 +59,10 @@ Fetch by ID: GET /devices/{id}
 
 Filter: GET /devices?brand=brand_name ##fetches all devices with brand_name
 
-Update/Upsert: PUT /devices/{id}
+Update/Upsert: PUT /devices/{id} 
 
 Delete: DELETE /devices/{id}
+
 ---
 ### Access Swagger UI:
 The API is documented using [springdoc-openapi](https://springdoc.org/).
@@ -71,10 +72,11 @@ Access Swagger UI
 
 OpenAPI JSON:
 ``http://localhost:8080/v3/api-docs``
----
 
 #### Constraints
 - Devices in IN_USE state cannot be deleted or have name/brand modified.
 - Only valid DeviceState values allowed: AVAILABLE, IN_USE, INACTIVE.
   Swagger/OpenAPI Documentation
 - The API is documented using springdoc-openapi.
+
+---
