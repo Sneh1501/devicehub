@@ -76,10 +76,12 @@ class DeviceControllerTest {
 
     @Test
     void getDevice_shouldReturnNotFound_whenNotFound() throws Exception {
-        when(deviceService.getDeviceById(1L)).thenReturn(null);
+        doThrow(new NoSuchElementException("Device not found")).when(deviceService).getDeviceById(1L);
 
         mockMvc.perform(get("/devices/1"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.status").value(404))
+                .andExpect(jsonPath("$.message").value("Device not found"));
     }
 
     @Test

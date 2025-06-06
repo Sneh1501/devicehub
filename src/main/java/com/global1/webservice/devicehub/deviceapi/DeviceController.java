@@ -22,14 +22,12 @@ public class DeviceController {
 
     @PostMapping
     public ResponseEntity<DeviceDTO> createDevice(@Valid @RequestBody DeviceDTO deviceDTO) {
-        //TODO: Update ResponseEntity to be more specific with customised ExceptionHandling
         return ResponseEntity.ok(deviceService.createDevice(deviceDTO));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DeviceDTO> getDevice(@PathVariable Long id) {
-        DeviceDTO dto = deviceService.getDeviceById(id);
-        return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
+        return ResponseEntity.ok(deviceService.getDeviceById(id));
     }
 
     @PutMapping("/{id}")
@@ -41,7 +39,6 @@ public class DeviceController {
         return replaced != null ? ResponseEntity.ok(replaced) : ResponseEntity.notFound().build();
     }
 
-    //TODO: add documentation for URLs
     @GetMapping
     public ResponseEntity<List<DeviceDTO>> getDevicesByFilters(
             @RequestParam(required = false) String name,

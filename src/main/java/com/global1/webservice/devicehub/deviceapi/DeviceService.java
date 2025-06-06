@@ -30,7 +30,7 @@ public class DeviceService {
     public DeviceDTO getDeviceById(Long id) {
         return deviceRepository.findById(id)
                 .map(mapper::toDTO)
-                .orElse(null);
+                .orElseThrow(() -> new NoSuchElementException("Device not found with id: " + id));
     }
 
     public DeviceDTO updateDevice(Long id, DeviceDTO updatedDto) {
